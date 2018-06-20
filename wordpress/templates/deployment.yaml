@@ -42,11 +42,11 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/mysql
               readOnly: false
-              name: mariadbstorage
+              name: mariadb
       volumes:
         - name: mariadbstorage
           persistentVolumeClaim:
-            claimName: mariadbstorage
+            claimName: mariadb
       restartPolicy: {{ .Values.restartPolicy }}
 
 ---
