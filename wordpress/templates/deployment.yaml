@@ -12,50 +12,73 @@ storageClassName: {{ .Values.storageClassName }}
 
 ---
 
-apiVersion: v1
-kind: Pod
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
 metadata:
-  name: mariadb
   labels:
     app: mariadb
+  name: mariadb
 spec:
-  containers:
-  - name: mariadb
-    image: mariadb
-    env:
-    - name: MYSQL_ROOT_PASSWORD
-      value: {{ .Values.password }}
-    volumeMounts:
-    - name: mariadbstorage
-      mountPath: /var/lib/mysql
-      readOnly: false
-  volumes:
-  - name: mariadbstorage
-    persistentVolumeClaim:
-      claimName: mariadbstorage
-  restartPolicy: {{ .Values.restartPolicy }}
+  replicas: 1
+  selector:
+    app: mariadb
+    deploymentconfig: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+        deploymentconfig: mariadb
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: {{ .Values.password }}
+          image: library/mariadb
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          name: mariadb
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              readOnly: false
+              name: mariadbstorage
+      volumes:
+        - name: mariadbstorage
+          persistentVolumeClaim:
+            claimName: mariadbstorage
+      restartPolicy: {{ .Values.restartPolicy }}
 
 ---
 
-apiVersion: v1
-kind: Pod
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
 metadata:
-  name: wordpress
   labels:
-    app: wordperss
+    app: wordpress
+  name: wordpress
 spec:
-  containers:
-  - name: wordpress
-    image: {{ .Values.imagewordpress }}
-    imagePullPolicy: {{ .Values.pullPolicy }}
-    env:
-    - name: WORDPRESS_DB_HOST
-      value: "mariadb:3306"
-      ports:
-      - name: http
-        containerPort: 80
-        protocol: TCP
-  restartPolicy: {{ .Values.restartPolicy }}
+  replicas: 1
+  selector:
+    app: wordpress
+    deploymentconfig: wordpress
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        deploymentconfig: wordpress
+    spec:
+      containers:
+        - env:
+            - name: WORDPRESS_DB_HOST
+              value: "mariadb:3306"
+          image: {{ .Values.imagewordpress }}
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          name: wordpress
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: {{ .Values.restartPolicy }}
       
 ---
 
