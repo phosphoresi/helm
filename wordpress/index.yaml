@@ -3,11 +3,20 @@ entries:
   wordpress:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-06-20T17:17:21.999280689+02:00
+    created: 2018-06-20T17:29:10.073208467+02:00
+    description: A Helm chart for Kubernetes
+    digest: c90550919527d7f37b081ce95ed6120ea5f757159c186282fd86994805dadfa3
+    name: wordpress
+    urls:
+    - wordpress-rancher-0.1.0.tgz
+    version: rancher-0.1.0
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2018-06-20T17:29:10.072220989+02:00
     description: A Helm chart for Kubernetes
     digest: a2d851767d6cc44762633ebc9b551a35170a7f14aff7ad8772ea779ba27d2cba
     name: wordpress
     urls:
     - wordpress-openshift-0.1.0.tgz
     version: openshift-0.1.0
-generated: 2018-06-20T17:17:21.998232777+02:00
+generated: 2018-06-20T17:29:10.071092147+02:00
