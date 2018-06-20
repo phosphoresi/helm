@@ -16,45 +16,6 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   labels:
-    app: mariadb
-  name: mariadb
-spec:
-  replicas: 1
-  selector:
-    app: mariadb
-    deploymentconfig: mariadb
-  template:
-    metadata:
-      labels:
-        app: mariadb
-        deploymentconfig: mariadb
-    spec:
-      containers:
-        - env:
-            - name: MYSQL_ROOT_PASSWORD
-              value: {{ .Values.password }}
-          image: library/mariadb
-          imagePullPolicy: {{ .Values.pullPolicy }}
-          name: mariadb
-          ports:
-            - containerPort: 3306
-              protocol: TCP
-          volumeMounts:
-            - mountPath: /var/lib/mysql
-              readOnly: false
-              name: mariadb
-      volumes:
-        - name: mariadb
-          persistentVolumeClaim:
-            claimName: mariadbstorage
-      restartPolicy: {{ .Values.restartPolicy }}
-
----
-
-apiVersion: apps.openshift.io/v1
-kind: DeploymentConfig
-metadata:
-  labels:
     app: wordpress
   name: wordpress
 spec:
@@ -103,3 +64,42 @@ status:
       host: {{ .Values.host }}
       routerName: router
 wildcardPolicy: None
+
+---
+
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: mariadb
+  name: mariadb
+spec:
+  replicas: 1
+  selector:
+    app: mariadb
+    deploymentconfig: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+        deploymentconfig: mariadb
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: {{ .Values.password }}
+          image: library/mariadb
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          name: mariadb
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              readOnly: false
+              name: mariadb
+      volumes:
+        - name: mariadb
+          persistentVolumeClaim:
+            claimName: mariadbstorage
+      restartPolicy: {{ .Values.restartPolicy }}
