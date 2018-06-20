@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: mariadbstrorage
+spec:
+ accessModes:
+  - {{ .Values.accessmodesmariadb }}
+ resources:
+   requests:
+        storage: {{ .Values.storagemariadb }}
+storageClassName: {{ .Values.storageClassName }}
+
+---
+
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
@@ -24,10 +38,10 @@ spec:
         - name: mariadbstorage
           mountPath: /var/lib/mysql
           readOnly: false
-        volumes:
-        - name: mariadbstorage
-          persistentVolumeClaim:
-            claimName: mariadbstorage
+      volumes:
+      - name: mariadbstorage
+        persistentVolumeClaim:
+          claimName: mariadbstorage
 
       - name: wordpress
         image: {{ .Values.imagewordpress }}
