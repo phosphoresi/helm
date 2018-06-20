@@ -13,6 +13,48 @@ spec:
 
 ---
 
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: wordpress-deployment
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: {{ template "wordpress.name" . }}
+    spec:
+      containers:
+        - name: mariadb
+          image: mariadb
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: {{ .Values.password }}
+          volumeMounts:
+          - name: mariadbstorage
+            mountPath: /var/lib/mysql
+            readOnly: false
+        volumes:
+        - name: mariadbstorage
+          persistentVolumeClaim:
+            claimName: mariastorage
+
+        - name: wordpress
+          image: wordpress:php7.0-apache
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+        restartPolicy: {{ .Values.restartPolicy }}
+
+---
+
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
@@ -41,34 +83,3 @@ status:
       host: nginx-cert-manager.router.default.svc.cluster.local
       routerName: router
       wildcardPolicy: None
-
----
-
-apiVersion: apps/v1beta2
-kind: Deployment
-metadata:
-  name: wordpress-deployment
-  labels:
-    app: wordpress
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: wordpress
-  template:
-    metadata:
-      labels:
-        app: {{ template "wordpress.name" . }}
-    spec:
-      containers:
-        - name: mariadb
-          image: mariadb
-
-        - name: wordpress
-          image: wordpress:php7.0-apache
-          imagePullPolicy: {{ .Values.pullPolicy }}
-          ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-        restartPolicy: {{ .Values.restartPolicy }}

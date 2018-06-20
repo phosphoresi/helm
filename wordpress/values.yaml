@@ -2,3 +2,4 @@ restartPolicy: Always
 pullPolicy: IfNotPresent
 storage: 5Gi
 storageClassName: glusterfs-storage
+password: "password"
