@@ -1,0 +1,3 @@
+storagemariadb: 5Gi
+storageClassName: glusterfs-storage
+accessmodesmariadb: ReadWriteMany
