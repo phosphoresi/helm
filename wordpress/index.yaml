@@ -3,11 +3,11 @@ entries:
   wordpress:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-06-20T15:18:09.015967828+02:00
+    created: 2018-06-20T15:49:19.074184347+02:00
     description: A Helm chart for Kubernetes
-    digest: a3f02a45bfc08afa2532ca18056aef89df3c80b59b1c35fed6522f263ce99feb
+    digest: d3164613a5ca6b366adbb1f0a93962e594923f500c1959dfdbab1871915f7dc0
     name: wordpress
     urls:
     - wordpress-0.1.0.tgz
     version: 0.1.0
-generated: 2018-06-20T15:18:09.01498689+02:00
+generated: 2018-06-20T15:49:19.072959014+02:00
