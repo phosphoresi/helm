@@ -12,49 +12,53 @@ storageClassName: {{ .Values.storageClassName }}
 
 ---
 
-apiVersion: apps/v1beta2
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: wordpress-deployment
+  name: mariadb
   labels:
-    app: wordpress
+    app: mariadb
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: wordpress
-  template:
-    metadata:
-      labels:
-        app: wordpress
-    spec:
-      containers:
-      - name: mariadb
-        image: mariadb
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: {{ .Values.password }}
-        volumeMounts:
-        - name: mariadbstorage
-          mountPath: /var/lib/mysql
-          readOnly: false
-      volumes:
-      - name: mariadbstorage
-        persistentVolumeClaim:
-          claimName: mariadbstorage
+  containers:
+  - name: mariadb
+    image: mariadb
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: {{ .Values.password }}
+    volumeMounts:
+    - name: mariadbstorage
+      mountPath: /var/lib/mysql
+      readOnly: false
+  volumes:
+  - name: mariadbstorage
+    persistentVolumeClaim:
+      claimName: mariadbstorage
+  restartPolicy: {{ .Values.restartPolicy }}
 
-      - name: wordpress
-        image: {{ .Values.imagewordpress }}
-        imagePullPolicy: {{ .Values.pullPolicy }}
-        env:
-        - name: WORDPRESS_DB_HOST
-          value: "mariadb:3306"
-          ports:
-          - name: http
-            containerPort: 80
-            protocol: TCP
-      restartPolicy: {{ .Values.restartPolicy }}
 ---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wordpress
+  labels:
+    app: wordperss
+spec:
+  containers:
+  - name: wordpress
+    image: {{ .Values.imagewordpress }}
+    imagePullPolicy: {{ .Values.pullPolicy }}
+    env:
+    - name: WORDPRESS_DB_HOST
+      value: "mariadb:3306"
+      ports:
+      - name: http
+        containerPort: 80
+        protocol: TCP
+  restartPolicy: {{ .Values.restartPolicy }}
+      
+---
+
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
