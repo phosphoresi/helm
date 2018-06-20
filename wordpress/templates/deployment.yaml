@@ -1,14 +1,30 @@
 apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: volumewordpress
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 10Gi
+  hostPath:
+    path: /opt/wordpress
+  persistentVolumeReclaimPolicy: Retain
+
+---
+
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
- name: mariadbstorage
+  name: volumemaria
 spec:
- accessModes:
-  - {{ .Values.accessmodesmariadb }}
- resources:
-   requests:
-        storage: {{ .Values.storagemariadb }}
-storageClassName: {{ .Values.storageClassName }}
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: ""
+  volumeName: volumewordpress
 
 ---
 
@@ -99,9 +115,9 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/mysql
               readOnly: false
-              name: volumebd
+              name: volumedata
       volumes:
-        - name: volumebd
+        - name: volumedata
           persistentVolumeClaim:
-            claimName: mariadbstorage
+            claimName: volumemaria
       restartPolicy: {{ .Values.restartPolicy }}
