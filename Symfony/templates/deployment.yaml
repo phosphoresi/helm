@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+ name: mariastrorage
+ namespace: 
+spec:
+ accessModes:
+  - ReadWriteMany
+ resources:
+   requests:
+        storage: {{ .Values.storage }}
+ storageClassName: {{ .Values.storageClassName }}
+
+---
+
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+  namespace: cert-manager
+  resourceVersion: '479827'
+  selfLink: /apis/route.openshift.io/v1/namespaces/cert-manager/routes/nginx
+  uid: ff31e103-7463-11e8-86cd-001a4a160108
+spec:
+  host: nginx-cert-manager.router.default.svc.cluster.local
+  port:
+    targetPort: 80-tcp
+  to:
+    kind: Service
+    name: nginx
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+    - conditions:
+        - lastTransitionTime: '2018-06-20T08:29:06Z'
+          status: 'True'
+          type: Admitted
+      host: nginx-cert-manager.router.default.svc.cluster.local
+      routerName: router
+      wildcardPolicy: None
+
+---
+
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: wordpress-deployment
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      labels:
+        app: {{ template "wordpress.name" . }}
+    spec:
+      containers:
+        - name: mariadb
+          image: mariadb
+
+        - name: wordpress
+          image: wordpress:php7.0-apache
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+        restartPolicy: {{ .Values.restartPolicy }}
