@@ -44,9 +44,9 @@ spec:
               readOnly: false
               name: mariadb
       volumes:
-        - name: mariadbstorage
+        - name: mariadb
           persistentVolumeClaim:
-            claimName: mariadb
+            claimName: mariadbstorage
       restartPolicy: {{ .Values.restartPolicy }}
 
 ---
