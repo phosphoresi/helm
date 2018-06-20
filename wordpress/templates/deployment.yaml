@@ -29,31 +29,31 @@ spec:
         app: wordpress
     spec:
       containers:
-        - name: mariadb
-          image: mariadb
-          env:
-          - name: MYSQL_ROOT_PASSWORD
-            value: {{ .Values.password }}
-          volumeMounts:
-          - name: mariadbstorage
-            mountPath: /var/lib/mysql
-            readOnly: false
+      - name: mariadb
+        image: mariadb
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: {{ .Values.password }}
+        volumeMounts:
+        - name: mariadbstorage
+          mountPath: /var/lib/mysql
+          readOnly: false
         volumes:
         - name: mariadbstorage
           persistentVolumeClaim:
             claimName: mariastorage
 
-        - name: wordpress
-          image: {{ .Values.imagewordpress }}
-          imagePullPolicy: {{ .Values.pullPolicy }}
-          env:
-          - name: WORDPRESS_DB_HOST
-            value: "mariadb:3306"
+      - name: wordpress
+        image: {{ .Values.imagewordpress }}
+        imagePullPolicy: {{ .Values.pullPolicy }}
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: "mariadb:3306"
           ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-        restartPolicy: {{ .Values.restartPolicy }}
+          - name: http
+            containerPort: 80
+            protocol: TCP
+      restartPolicy: {{ .Values.restartPolicy }}
 
 ---
 
