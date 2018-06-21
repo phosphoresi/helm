@@ -36,8 +36,6 @@ metadata:
   name: wordpress
 spec:
   replicas: 1
-  selector:
-    app: wordpress
   template:
     metadata:
       labels:
@@ -91,8 +89,6 @@ metadata:
   name: mariadb
 spec:
   replicas: 1
-  selector:
-    app: mariadb
   template:
     metadata:
       labels:
