@@ -48,6 +48,8 @@ spec:
         - env:
             - name: WORDPRESS_DB_HOST
               value: "mariadb:3306"
+            - name: WORDPRESS_DB_HOST
+              value: "root"
             - name: WORDPRESS_DB_PASSWORD
               value: {{ .Values.password }}
           image: {{ .Values.imagewordpress }}
