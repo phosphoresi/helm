@@ -2,7 +2,7 @@ restartPolicy: Always
 pullPolicy: IfNotPresent
 password: "password"
 imagewordpress: docker.io/wordpress:4.9.6-php7.0-apache
-host: wordpresstest.generac.phosphore.si
+host: wordpressrancher.generac.phosphore.si
 storage: 10Gi
 path: /opt/wordpress
 accessmodes: ReadWriteOnce
