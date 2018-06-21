@@ -3,11 +3,11 @@ entries:
   wordpress-openshift:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-06-21T10:51:57.391603866+02:00
+    created: 2018-06-21T10:55:51.291352933+02:00
     description: A Helm chart for Kubernetes
-    digest: dc133f22489c6894250c97b2cb082b777072ea43f602cdc204e6677a5e1347ce
+    digest: d26879b83fdc5d339b53adb18448a15376352b1b0acfa8fa75e0a7636aa35bda
     name: wordpress-openshift
     urls:
     - wordpress-openshift-0.1.0.tgz
     version: 0.1.0
-generated: 2018-06-21T10:51:57.390296397+02:00
+generated: 2018-06-21T10:55:51.289327052+02:00
