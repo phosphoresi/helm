@@ -6,3 +6,5 @@ host: wordpresstest.generac.phosphore.si
 storagemariadb: 5Gi
 storageClassName: glusterfs-storage
 accessmodesmariadb: ReadWriteOnce
+mariadbname: mariadb
+wordpressname: wordpress
