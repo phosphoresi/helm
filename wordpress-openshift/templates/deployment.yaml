@@ -25,18 +25,17 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   labels:
-    app: wordpress
-  name: wordpress
+    app: {{ .Values.wordpressname }}
+  name: {{ .Values.wordpressname }}
 spec:
-  replicas: 1
   selector:
-    app: wordpress
-    deploymentconfig: wordpress
+    app: {{ .Values.wordpressname }}
+    deploymentconfig: {{ .Values.wordpressname }}
   template:
     metadata:
       labels:
-        app: wordpress
-        deploymentconfig: wordpress
+        app: {{ .Values.wordpressname }}
+        deploymentconfig: {{ .Values.wordpressname }}
     spec:
       containers:
         - env:
@@ -51,7 +50,7 @@ spec:
                   key: password
           image: {{ .Values.imagewordpress }}
           imagePullPolicy: {{ .Values.pullPolicy }}
-          name: wordpress
+          name: {{ .Values.wordpressname }}
           ports:
             - containerPort: 80
               protocol: TCP
@@ -87,18 +86,17 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   labels:
-    app: mariadb
-  name: mariadb
+    app: {{ .Values.mariadbname }}
+  name: {{ .Values.mariadbname }}
 spec:
-  replicas: 1
   selector:
-    app: mariadb
-    deploymentconfig: mariadb
+    app: {{ .Values.mariadbname }}
+    deploymentconfig: {{ .Values.mariadbname }}
   template:
     metadata:
       labels:
-        app: mariadb
-        deploymentconfig: mariadb
+        app: {{ .Values.mariadbname }}
+        deploymentconfig: {{ .Values.mariadbname }}
     spec:
       containers:
         - env:
@@ -109,16 +107,16 @@ spec:
                   key: password
           image: library/mariadb
           imagePullPolicy: {{ .Values.pullPolicy }}
-          name: mariadb
+          name: {{ .Values.mariadbname }}
           ports:
             - containerPort: 3306
               protocol: TCP
           volumeMounts:
             - mountPath: /var/lib/mysql
               readOnly: false
-              name: volumebd
+              name: {{ .Values.mariadbname }}
       volumes:
-        - name: volumebd
+        - name: {{ .Values.mariadbname }}
           persistentVolumeClaim:
             claimName: mariadbstorage
       restartPolicy: {{ .Values.restartPolicy }}
