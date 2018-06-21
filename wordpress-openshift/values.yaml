@@ -1,6 +1,5 @@
 restartPolicy: Always
 pullPolicy: IfNotPresent
-password: "password"
 imagewordpress: docker.io/wordpress:4.9.6-php7.0-apache
 host: wordpresstest.generac.phosphore.si
 storagemariadb: 5Gi
