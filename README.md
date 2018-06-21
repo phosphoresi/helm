@@ -1,7 +1,12 @@
 # Pour Openshift Origin
 
 ## Prérequis
-Il faut avoir helm cli installé et bien configuré sur le master.
+Il faut avoir helm cli installé et bien configuré sur le master. Vous pouvez le voir en faisant :
+```
+helm version
+Client: &version.Version{SemVer:"v2.9.0", GitCommit:"f6025bb9ee7daf9fee0026541c90a6f557a3e0bc", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.9.0", GitCommit:"f6025bb9ee7daf9fee0026541c90a6f557a3e0bc", GitTreeState:"clean"}
+``` 
 
 ## Ajouter un dépot
 - Executer depuis le master les commandes suivantes :
