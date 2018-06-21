@@ -6,9 +6,9 @@ spec:
   accessModes:
   - ReadWriteOnce
   capacity:
-    storage: 10Gi
+    storage: {{ .Values.storage }}
   hostPath:
-    path: /opt/wordpress
+    path: {{ .Values.path }}
   persistentVolumeReclaimPolicy: Delete
 
 ---
@@ -22,7 +22,7 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 10Gi
+      storage: {{ .Values.storage }}
   storageClassName: ""
   volumeName: volumewordpress
 
