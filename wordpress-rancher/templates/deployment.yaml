@@ -38,12 +38,10 @@ spec:
   replicas: 1
   selector:
     app: wordpress
-    deploymentconfig: wordpress
   template:
     metadata:
       labels:
         app: wordpress
-        deploymentconfig: wordpress
     spec:
       containers:
         - env:
@@ -95,12 +93,10 @@ spec:
   replicas: 1
   selector:
     app: mariadb
-    deploymentconfig: mariadb
   template:
     metadata:
       labels:
         app: mariadb
-        deploymentconfig: mariadb
     spec:
       containers:
         - env:
