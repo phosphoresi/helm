@@ -53,15 +53,15 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   labels:
-    app: wordpress
-  name: wordpress
+    app: {{ .Values.wordpressname }}
+  name: {{ .Values.wordpressname }}
 spec:
   host: {{ .Values.host }}
   port:
     targetPort: 80-tcp
   to:
     kind: Service
-    name: wordpress
+    name: {{ .Values.wordpressname }}
     weight: 100
   wildcardPolicy: None
 status:
