@@ -4,7 +4,7 @@ metadata:
   name: wordpressvolume
 spec:
   accessModes:
-  - ReadWriteOnce
+  - {{ .Values.accessmodes }}
   capacity:
     storage: {{ .Values.storage }}
   hostPath:
@@ -19,7 +19,7 @@ metadata:
   name: volumemaria
 spec:
   accessModes:
-  - ReadWriteOnce
+  - {{ .Values.accessmodes }}
   resources:
     requests:
       storage: {{ .Values.storage }}
