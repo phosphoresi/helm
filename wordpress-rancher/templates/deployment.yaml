@@ -62,27 +62,25 @@ spec:
       
 ---
 
-apiVersion: route.openshift.io/v1
-kind: Route
+apiVersion: extensions/v1beta1
+kind: Ingress
 metadata:
-  labels:
-    app: wordpress
   name: wordpress
 spec:
-  host: {{ .Values.host }}
-  port:
-    targetPort: 80-tcp
-  to:
-    kind: Service
-    name: wordpress
-    weight: 100
-  wildcardPolicy: None
+  rules:
+  - host: {{ .Values.host }}
+    http:
+      paths:
+      - backend:
+          serviceName: ingress-978081268d311422b8c1011304b8794a
+          servicePort: 80
 status:
-  ingress:
-    - conditions:
-      host: {{ .Values.host }}
-      routerName: router
-wildcardPolicy: None
+  loadBalancer:
+    ingress:
+    - ip: 10.4.3.10
+    - ip: 10.4.3.14
+    - ip: 10.4.3.15
+
 
 ---
 
