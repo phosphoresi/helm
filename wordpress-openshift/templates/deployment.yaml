@@ -19,6 +19,7 @@ metadata:
     app: {{ .Values.wordpressname }}
   name: {{ .Values.wordpressname }}
 spec:
+  replicas: 1
   selector:
     app: {{ .Values.wordpressname }}
     deploymentconfig: {{ .Values.wordpressname }}
@@ -80,6 +81,7 @@ metadata:
     app: {{ .Values.mariadbname }}
   name: {{ .Values.mariadbname }}
 spec:
+  replicas: 1
   selector:
     app: {{ .Values.mariadbname }}
     deploymentconfig: {{ .Values.mariadbname }}
