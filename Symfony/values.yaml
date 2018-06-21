@@ -2,10 +2,8 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 replicaCount: 1
-image:
-  repository: nginx
-  tag: stable
-  pullPolicy: IfNotPresent
+image: richarvey/nginx-php-fpm:latest
+pullPolicy: IfNotPresent
 service:
   name: nginx
   type: ClusterIP
