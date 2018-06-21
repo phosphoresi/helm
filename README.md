@@ -37,10 +37,20 @@ NAME                         	CHART VERSION	APP VERSION	DESCRIPTION
 wordpress/wordpress-openshift	0.1.0        	1.0        	A Helm chart for Kubernetes
 ```
 ### On déploie l'application :
+
+#### Sans paramètre(s)
 ```
 # helm install --namespace=<namespace> <nom_du_depot>/<nom_du_dossier>
 ```
 - Exemple :
 ```
 # helm install --namespace=wordpress wordpress/wordpress-openshift
+```
+#### Avec paramètre(s)
+```
+# helm install --set <nom_du_parametre_dans_values.yaml>=<valeur> --namespace=<namespace> <nom_du_depot>/<nom_du_dossier>
+```
+- Exemple :
+```
+# helm install --set password=pJBV0Jwu3pSzi9rzCc0u --namespace=wordpress wordpress/wordpress-openshift
 ```
