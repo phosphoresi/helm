@@ -8,7 +8,7 @@ Il faut avoir helm cli installé et bien configuré sur le master.
 ### On l'ajoute
 `# helm repo add <nom_du_depot> https://raw.githubusercontent.com/phosphoresi/helm/master/<nom_du_dossier>`
 - Exemple : 
-`# helm repo add wordpress https://raw.githubusercontent.com/phosphoresi/helm/master/wordpress-openshift`
+```# helm repo add wordpress https://raw.githubusercontent.com/phosphoresi/helm/master/wordpress-openshift```
 ### On vérifie qu'il a bien été ajouté :
 `# helm repo list`
 
@@ -26,4 +26,4 @@ wordpress/wordpress-openshift	0.1.0        	1.0        	A Helm chart for Kuberne
 ### On déploie l'application :
 `# helm install --namespace=<namespace> <nom_du_depot>/<nom_du_dossier>`
 - Exemple :
-`# helm install --namespace=wordpress wordpress/wordpress-openshift`
+```# helm install --namespace=wordpress wordpress/wordpress-openshift```
