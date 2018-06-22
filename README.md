@@ -38,6 +38,7 @@ oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:tille
 ```
 # helm repo add wordpress https://raw.githubusercontent.com/phosphoresi/helm/master/wordpress-openshift
 # helm repo add secret https://raw.githubusercontent.com/phosphoresi/helm/master/secret-wordpress
+# helm repo update
 ```
 ### On vérifie qu'ils ont bien été ajouté :
 ```
