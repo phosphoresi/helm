@@ -1,24 +1,42 @@
 # Pour Openshift Origin
 
-## Prérequis
-Il faut avoir helm cli installé et bien configuré sur le master. Vous pouvez le voir en faisant :
-```
-# helm version
-Client: &version.Version{SemVer:"v2.9.0", GitCommit:"f6025bb9ee7daf9fee0026541c90a6f557a3e0bc", GitTreeState:"clean"}
-Server: &version.Version{SemVer:"v2.9.0", GitCommit:"f6025bb9ee7daf9fee0026541c90a6f557a3e0bc", GitTreeState:"clean"}
-``` 
-
-## Ajouter un dépot
 - Executer depuis le master les commandes suivantes :
-### On l'ajoute
+
+## Installer Helm et Tiller
+
+- Créer un projet tiller
 ```
-# helm repo add <nom_du_depot> https://raw.githubusercontent.com/phosphoresi/helm/master/<nom_du_dossier>
+# oc new-project tiller
 ```
-- Exemple : 
+- Exporter le namespace de tiller
+```
+# export TILLER_NAMESPACE=tiller
+```
+- Télécharger helm client 
+```
+# curl -s https://storage.googleapis.com/kubernetes-helm/helm-v2.9.0-linux-amd64.tar.gz | tar xz
+# cd linux-amd64
+# mv helm /usr/bin
+# helm init --client-only
+...
+$HELM_HOME has been configured at /.../.helm.
+Not installing Tiller due to 'client-only' flag having been set
+Happy Helming!
+```
+- Installer tiller 
+```
+# oc process -f https://github.com/openshift/origin/raw/master/examples/helm/tiller-template.yaml -p TILLER_NAMESPACE="${TILLER_NAMESPACE}" -p HELM_VERSION=v2.9.0 | oc create -f -
+```
+Attendez un petit peu et helm est configuré. Vous pouvez alors continuer ce guide pour installer notre image wordpress
+
+## Déployer wordpress-openshift
+
+### Ajouter les dépots nécessaires
 ```
 # helm repo add wordpress https://raw.githubusercontent.com/phosphoresi/helm/master/wordpress-openshift
+# helm repo add secret https://raw.githubusercontent.com/phosphoresi/helm/master/secret-wordpress
 ```
-### On vérifie qu'il a bien été ajouté :
+### On vérifie qu'ils ont bien été ajouté :
 ```
 # helm repo list
 ```
@@ -26,10 +44,7 @@ Server: &version.Version{SemVer:"v2.9.0", GitCommit:"f6025bb9ee7daf9fee0026541c9
 ## Déployer l'application
 
 ### On peut chercher les applications disponibles :
-```
-# helm search <nom_du_dépot>/
-```
-- Exemple :
+
 ```
 # helm search wordpress/
 
@@ -38,19 +53,6 @@ wordpress/wordpress-openshift	0.1.0        	1.0        	A Helm chart for Kuberne
 ```
 ### On déploie l'application :
 
-#### Sans paramètre(s)
 ```
-# helm install --namespace=<namespace> <nom_du_depot>/<nom_du_dossier>
-```
-- Exemple :
-```
-# helm install --namespace=wordpress wordpress/wordpress-openshift
-```
-#### Avec paramètre(s)
-```
-# helm install --set <nom_du_parametre_dans_values.yaml>=<valeur> --namespace=<namespace> <nom_du_depot>/<nom_du_dossier>
-```
-- Exemple :
-```
-# helm install --set password=pJBV0Jwu3pSzi9rzCc0u --namespace=wordpress wordpress/wordpress-openshift
+# helm install --set password="cGFzc3dvcmQ=" --namespace=wordpress secret/secret-wordpress
 ```
