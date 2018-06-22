@@ -56,7 +56,7 @@ wordpress/wordpress-openshift	0.1.0        	1.0        	A Helm chart for Kuberne
 ```
 ### On créer le projet :
 ```
-oc new-project wordpress
+# oc new-project wordpress
 ```
  
 ### On déploie l'application :
