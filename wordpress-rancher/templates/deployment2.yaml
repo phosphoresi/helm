@@ -1,0 +1,75 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: {{ .Values.wordpressname }}
+  name: {{ .Values.wordpressname }}
+spec:
+  replicas: 1
+  selector:
+    app: {{ .Values.wordpressname }}
+    deploymentconfig: {{ .Values.wordpressname }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.wordpressname }}
+        deploymentconfig: {{ .Values.wordpressname }}
+    spec:
+      containers:
+        - env:
+            - name: WORDPRESS_DB_HOST
+              value: "mariadb:3306"
+            - name: WORDPRESS_DB_USER
+              value: "root"
+            - name: WORDPRESS_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-secret
+                  key: password
+          image: {{ .Values.imagewordpress }}
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          name: {{ .Values.wordpressname }}
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: {{ .Values.restartPolicy }}
+      
+---
+
+metadata:
+  labels:
+    app: {{ .Values.mariadbname }}
+  name: {{ .Values.mariadbname }}
+spec:
+  replicas: 1
+  selector:
+    app: {{ .Values.mariadbname }}
+    deploymentconfig: {{ .Values.mariadbname }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mariadbname }}
+        deploymentconfig: {{ .Values.mariadbname }}
+    spec:
+      containers:
+        - env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-secret
+                  key: password
+          image: library/mariadb
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          name: {{ .Values.mariadbname }}
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/mysql
+              readOnly: false
+              name: volume-{{ .Values.mariadbname }}
+      volumes:
+        - name: volume-{{ .Values.mariadbname }}
+          persistentVolumeClaim:
+            claimName: storage-{{ .Values.mariadbname }}
+      restartPolicy: {{ .Values.restartPolicy }}
