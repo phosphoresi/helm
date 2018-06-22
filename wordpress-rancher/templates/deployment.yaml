@@ -106,7 +106,7 @@ spec:
               value: {{ .Values.password }}
           image: library/mariadb
           imagePullPolicy: {{ .Values.pullPolicy }}
-          name:{{ .Values.mariadbname }} {{ .Values.mariadbname }}
+          name: {{ .Values.mariadbname }}
           ports:
             - containerPort: 3306
               protocol: TCP
