@@ -6,3 +6,5 @@ host: wordpressrancher.generac.phosphore.si
 storage: 10Gi
 path: /opt/wordpress
 accessmodes: ReadWriteOnce
+mariadbname: mariadb
+wordpressname: wordpress
