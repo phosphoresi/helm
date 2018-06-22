@@ -4,7 +4,7 @@ metadata:
   name: volume-{{ .Values.mariadbname }}
 spec:
   accessModes:
-  - {{ .Values.accessmodes }}
+  - {{ .Values.accessmodesmariadb }}
   capacity:
     storage: {{ .Values.storage }}
   hostPath:
