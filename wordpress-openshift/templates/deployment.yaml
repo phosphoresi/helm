@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
- name: storage{{ .Values.mariadbname }}
+ name: storage-{{ .Values.mariadbname }}
 spec:
  accessModes:
   - {{ .Values.accessmodesmariadb }}
@@ -111,5 +111,5 @@ spec:
       volumes:
         - name: {{ .Values.mariadbname }}
           persistentVolumeClaim:
-            claimName: mariadbstorage
+            claimName: storage-{{ .Values.mariadbname }}
       restartPolicy: {{ .Values.restartPolicy }}
