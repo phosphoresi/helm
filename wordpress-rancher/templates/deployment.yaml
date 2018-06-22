@@ -19,7 +19,7 @@ metadata:
   name: volume{{ .Values.mariadbname }}
 spec:
   accessModes:
-  - {{ .Values.accessmodes }}
+  - {{ .Values.accessmodesmariadb }}
   resources:
     requests:
       storage: {{ .Values.storage }}
