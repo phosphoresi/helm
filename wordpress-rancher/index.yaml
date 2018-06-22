@@ -3,11 +3,11 @@ entries:
   wordpress-rancher:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-06-22T15:41:57.905846543+02:00
+    created: 2018-06-22T15:45:44.816604434+02:00
     description: A Helm chart for Kubernetes
-    digest: 1a2a97d3c06d31336d2c39d654cf5c5e27c7da6cb8baedc06cb1762a83c85fa6
+    digest: b0c16668f26667e47c2579dd738794f345ae7cc8c0f36e4f73c3dfecb23222e6
     name: wordpress-rancher
     urls:
     - wordpress-rancher-0.1.0.tgz
     version: 0.1.0
-generated: 2018-06-22T15:41:57.904502425+02:00
+generated: 2018-06-22T15:45:44.814070034+02:00
