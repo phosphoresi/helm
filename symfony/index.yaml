@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  symfony:
+  - apiVersion: v1
+    created: 2018-06-22T17:11:16.14631263+02:00
+    description: A Helm chart for Kubernetes
+    digest: d3bff4beb63ac7027355f9e6d13983bf6f04a4efb8e636260d92a1fa45f4a0a6
+    name: symfony
+    urls:
+    - symfony-0.1.0.tgz
+    version: 0.1.0
+generated: 2018-06-22T17:11:16.14462772+02:00
