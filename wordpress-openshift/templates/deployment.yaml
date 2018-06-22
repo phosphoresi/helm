@@ -107,9 +107,9 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/mysql
               readOnly: false
-              name: {{ .Values.mariadbname }}
+              name: volume-{{ .Values.mariadbname }}
       volumes:
-        - name: {{ .Values.mariadbname }}
+        - name: volume-{{ .Values.mariadbname }}
           persistentVolumeClaim:
             claimName: storage-{{ .Values.mariadbname }}
       restartPolicy: {{ .Values.restartPolicy }}
