@@ -1,7 +1,7 @@
 restartPolicy: Always
 pullPolicy: IfNotPresent
 imagewordpress: docker.io/wordpress:4.9.6-php7.0-apache
-host: wordpresstest.generac.phosphore.si
+host: wordpress.example.com
 storagemariadb: 5Gi
 storageClassName: glusterfs-storage
 accessmodesmariadb: ReadWriteOnce
