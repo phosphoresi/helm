@@ -58,7 +58,11 @@ wordpress/wordpress-openshift	0.1.0        	1.0        	A Helm chart for Kuberne
 ```
 # oc new-project wordpress
 ```
- 
+### Donnez les droits pour wordpress
+```
+# oc login -u system:admin
+# oc adm policy add-scc-to-user anyuid -z default
+```
 ### On déploie l'application :
 
 On créer un projet 
