@@ -27,7 +27,10 @@ Happy Helming!
 ```
 # oc process -f https://github.com/openshift/origin/raw/master/examples/helm/tiller-template.yaml -p TILLER_NAMESPACE="${TILLER_NAMESPACE}" -p HELM_VERSION=v2.9.0 | oc create -f -
 ```
-Attendez un petit peu et helm est configuré. Vous pouvez alors continuer ce guide pour installer notre image wordpress
+- Donnez les droits à tiller 
+```
+oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:tiller:tiller
+```
 
 ## Déployer wordpress-openshift
 
