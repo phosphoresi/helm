@@ -7,3 +7,4 @@ storageClassName: glusterfs-storage
 accessmodesmariadb: ReadWriteOnce
 mariadbname: mariadb
 wordpressname: wordpress
+path: /opt/wordpress
