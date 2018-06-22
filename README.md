@@ -58,4 +58,10 @@ wordpress/wordpress-openshift	0.1.0        	1.0        	A Helm chart for Kuberne
 
 ```
 # helm install --set password="cGFzc3dvcmQ=" --namespace=wordpress secret/secret-wordpress
+# helm install --namespace=wordpress--set host=<wordpress.example.com> --set storagemariadb=<5Gi> wordpress/wordpress-openshift
+```
+Si vous déployer un deuxième wordpress dans le même namespace, vous devez spécifier les variables mariadbname et wordpressname mais ne deployer pas un deuxième secret.
+
+```
+# helm install --namespace=wordpress--set host=<wordpress.example.com> --set storagemariadb=<5Gi> --set mariadbname=mariadb2 --set wordpressname=wordpress2 wordpress/wordpress-openshift
 ```
