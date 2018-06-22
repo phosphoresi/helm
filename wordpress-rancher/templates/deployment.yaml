@@ -22,7 +22,7 @@ spec:
   - {{ .Values.accessmodesmariadb }}
   resources:
     requests:
-      storage: {{ .Values.storage }}
+      storage: {{ .Values.storagemariadb }}
   storageClassName: ""
   volumeName: volume-{{ .Values.mariadbname }}
 
