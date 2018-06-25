@@ -75,7 +75,7 @@ On créer un projet
 Si vous déployer un deuxième wordpress dans le même namespace, vous devez spécifier les variables mariadbname et wordpressname mais ne deployer pas un deuxième secret.
 
 ```
-# helm install --namespace=wordpress--set host=<wordpress.example.com> --set storagemariadb=<5Gi> --set mariadbname=mariadb2 --set wordpressname=wordpress2 wordpress/wordpress-openshift
+# helm install --namespace=wordpress --set host=<wordpress.example.com> --set storagemariadb=<5Gi> --set mariadbname=<mariadb2> --set wordpressname=<wordpress2> wordpress/wordpress-openshift
 ```
 Vous pouvez remplacer toutes les valeurs spécifié dans le fichier values.yaml et utilisant l'option :
 ```
