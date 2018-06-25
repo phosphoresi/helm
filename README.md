@@ -4,6 +4,11 @@
 
 ## Installation Helm et Tiller
 
+- On se connecte
+```
+oc login -u <user>
+```
+
 - Créer un projet tiller
 ```
 # oc new-project tiller
