@@ -135,3 +135,12 @@ spec:
   type: ClusterIP
 status:
   loadBalancer: {}
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.wordpressname }}-secret
+data:
+password: {{ .Values.password }}
