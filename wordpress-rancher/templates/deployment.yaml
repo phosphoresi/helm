@@ -47,7 +47,7 @@ spec:
       containers:
         - env:
             - name: WORDPRESS_DB_HOST
-              value: "mariadb:3306"
+              value: {{ .Values.mariadbname }}:3306
             - name: WORDPRESS_DB_USER
               value: "root"
             - name: WORDPRESS_DB_PASSWORD
