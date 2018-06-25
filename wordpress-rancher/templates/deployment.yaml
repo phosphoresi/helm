@@ -125,3 +125,7 @@ spec:
           persistentVolumeClaim:
             claimName: volume{{ .Values.mariadbname }}
       restartPolicy: {{ .Values.restartPolicy }}
+
+---
+
+
