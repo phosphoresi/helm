@@ -142,8 +142,6 @@ spec:
     protocol: TCP
     targetPort: 3306
   selector:
-    deploymentconfig: {{ .Values.mariadbname }}
+    workloadID_{{ .Values.mariadbname }}: "true"
   sessionAffinity: None
   type: ClusterIP
-status:
-loadBalancer: {}
