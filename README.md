@@ -6,7 +6,7 @@
 
 - On se connecte
 ```
-oc login -u <user>
+# oc login -u <user>
 ```
 
 - Créer un projet tiller
