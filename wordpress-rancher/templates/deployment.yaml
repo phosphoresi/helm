@@ -49,7 +49,7 @@ spec:
             - name: WORDPRESS_DB_HOST
               value: {{ .Values.mariadbname }}:3306
             - name: WORDPRESS_DB_USER
-              value: "root"
+              value: root
             - name: WORDPRESS_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
