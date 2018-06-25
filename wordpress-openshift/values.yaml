@@ -5,5 +5,5 @@ host: wordpress.example.com
 storagemariadb: 5Gi
 storageClassName: glusterfs-storage
 accessmodesmariadb: ReadWriteOnce
-mariadbname: mariadb
-wordpressname: wordpress
+mariadbname: mariadb2
+wordpressname: wordpress2
