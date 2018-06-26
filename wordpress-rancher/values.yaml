@@ -7,3 +7,4 @@ accessmodesmariadb: ReadWriteOnce
 mariadbname: mariadb
 wordpressname: wordpress
 path: /opt/wordpress
+password: password
