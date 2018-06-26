@@ -1,5 +1,5 @@
 restartPolicy: Always
-pullPolicy: IfNotPresent
+imagePullPolicy: IfNotPresent
 imageodoo : docker-gitlab.sudokeys.com/infra/docker-odoo:11.0.1
 host: odoo.example.com
 storagemariadb: 5Gi
