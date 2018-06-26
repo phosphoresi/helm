@@ -39,13 +39,12 @@ oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:tille
 
 ## Déployer wordpress-openshift
 
-### Ajouter les dépots nécessaires :
+### Ajouter le dépot nécessaire :
 ```
 # helm repo add wordpress https://raw.githubusercontent.com/phosphoresi/helm/master/wordpress-openshift
-# helm repo add secret https://raw.githubusercontent.com/phosphoresi/helm/master/secret-wordpress
 # helm repo update
 ```
-### On vérifie qu'ils ont bien été ajouté :
+### On vérifie qu'il a bien été ajouté :
 ```
 # helm repo list
 ```
@@ -74,13 +73,12 @@ wordpress/wordpress-openshift	0.1.0        	1.0        	A Helm chart for Kuberne
 
 On créer un projet 
 ```
-# helm install --set password="cGFzc3dvcmQ=" --namespace=wordpress secret/secret-wordpress
-# helm install --namespace=wordpress --set host=<wordpress.example.com> --set storagemariadb=<5Gi> wordpress/wordpress-openshift
+# helm install --namespace=wordpress --set password=<"cGFzc3dvcmQ="> --set host=<wordpress.example.com> --set storagemariadb=<5Gi> wordpress/wordpress-openshift
 ```
-Si vous déployer un deuxième wordpress dans le même namespace, vous devez spécifier les variables mariadbname et wordpressname mais ne deployer pas un deuxième secret.
+Si vous déployer un deuxième wordpress dans le même namespace, vous devez spécifier les variables mariadbname et wordpressname.
 
 ```
-# helm install --namespace=wordpress --set host=<wordpress.example.com> --set storagemariadb=<5Gi> --set mariadbname=<mariadb2> --set wordpressname=<wordpress2> wordpress/wordpress-openshift
+# helm install --namespace=wordpress --set password=<"cGFzc3dvcmQ="> --set host=<wordpress.example.com> --set storagemariadb=<5Gi> --set mariadbname=<mariadb2> --set wordpressname=<wordpress2> wordpress/wordpress-openshift
 ```
 Vous pouvez remplacer toutes les valeurs spécifié dans le fichier values.yaml et utilisant l'option :
 ```
