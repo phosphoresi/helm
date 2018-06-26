@@ -38,7 +38,7 @@ spec:
             - name: WORDPRESS_DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: wordpress-secret
+                  name: {{ .Values.wordpressname }}-secret
                   key: password
           image: {{ .Values.imagewordpress }}
           imagePullPolicy: {{ .Values.pullPolicy }}
@@ -96,7 +96,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: wordpress-secret
+                  name: {{ .Values.wordpressname }}-secret
                   key: password
           image: library/mariadb
           imagePullPolicy: {{ .Values.pullPolicy }}
