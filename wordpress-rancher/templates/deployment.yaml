@@ -145,3 +145,34 @@ spec:
     workloadID_{{ .Values.mariadbname }}: "true"
   sessionAffinity: None
   type: ClusterIP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.wordpressname }}
+  name: {{ .Values.wordpressname }}
+spec:
+  clusterIP: None
+  ports:
+  - name: 80-tcp
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    deployment: {{ .Values.wordpressname }}
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+--- 
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Values.wordpressname }}-secret
+data:
+  password: {{ .Values.password }}
