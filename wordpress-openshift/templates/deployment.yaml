@@ -143,4 +143,4 @@ kind: Secret
 metadata:
   name: {{ .Values.wordpressname }}-secret
 data:
-password: {{ .Values.password }}
+  password: {{ .Values.password }}
