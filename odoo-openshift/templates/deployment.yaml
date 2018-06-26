@@ -1,0 +1,25 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: {{ .Values.odooname }}
+  name: {{ .Values.odooname }}
+spec:
+  replicas: 1
+  selector:
+    app: {{ .Values.odooname }}
+    deploymentconfig: {{ .Values.odooname }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.odooname }}
+        deploymentconfig: {{ .Values.odooname }}
+    spec:
+      containers:
+          image: {{ .Values.imageodoo }}
+          imagePullPolicy: {{ .Values.pullPolicy }}
+          name: {{ .Values.odooname }}
+          ports:
+            - containerPort: 80
+              protocol: TCP
+      restartPolicy: {{ .Values.restartPolicy }}
