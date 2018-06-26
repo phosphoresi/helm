@@ -139,6 +139,28 @@ status:
 ---
 
 apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.wordpressname }}
+  name: {{ .Values.wordpressname }}
+spec:
+  clusterIP: None
+  ports:
+  - name: 80-tcp
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    deploymentconfig: {{ .Values.wordpressname }}
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
+--- 
+
+apiVersion: v1
 kind: Secret
 metadata:
   name: {{ .Values.wordpressname }}-secret
