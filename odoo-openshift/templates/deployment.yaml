@@ -2,24 +2,24 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   labels:
-    app: {{ .Values.odooname }}
-  name: {{ .Values.odooname }}
+    app: {{ .Values.imageodoo }}
+  name: {{ .Values.imageodoo }}
 spec:
   replicas: 1
   selector:
-    app: {{ .Values.odooname }}
-    deploymentconfig: {{ .Values.odooname }}
+    app: {{ .Values.imageodoo }}
+    deploymentconfig: {{ .Values.imageodoo }}
   template:
     metadata:
       labels:
-        app: {{ .Values.odooname }}
-        deploymentconfig: {{ .Values.odooname }}
+        app: {{ .Values.imageodoo }}
+        deploymentconfig: {{ .Values.imageodoo }}
     spec:
       containers:
-          image: {{ .Values.imageodoo }}
-          imagePullPolicy: {{ .Values.pullPolicy }}
-          name: {{ .Values.odooname }}
-          ports:
-            - containerPort: 80
-              protocol: TCP
+        - image: 'docker-gitlab.sudokeys.com/infra/docker-odoo:11.0.1'
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          name: {{ .Values.imageodoo }}
+      dnsPolicy: ClusterFirst
       restartPolicy: {{ .Values.restartPolicy }}
+
+
