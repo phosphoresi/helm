@@ -70,8 +70,7 @@ wordpress/wordpress-openshift	0.1.0        	1.0        	A Helm chart for Kuberne
 # oc adm policy add-scc-to-user anyuid -z default
 ```
 ### On déploie l'application :
-
-On créer un projet 
+ 
 ```
 # helm install --namespace=wordpress --set password=<"cGFzc3dvcmQ="> --set host=<wordpress.example.com> --set storagemariadb=<5Gi> wordpress/wordpress-openshift
 ```
@@ -88,6 +87,55 @@ Example
 ```
 --set storagemariadb=50Gi
 ```
+
+
+## Déployer odoo-openshift
+
+### Ajouter le dépot nécessaire :
+```
+# helm repo add wordpress https://raw.githubusercontent.com/phosphoresi/helm/master/odoo-openshift
+# helm repo update
+```
+### On vérifie qu'il a bien été ajouté :
+```
+# helm repo list
+```
+
+## Déployer l'application
+
+### On peut chercher les applications disponibles :
+
+```
+# helm search odoo/
+
+NAME                         	CHART VERSION	APP VERSION	DESCRIPTION                
+odoo/odoo-openshift	0.1.0        	1.0        	A Helm chart for Kubernetes
+```
+### On créer le projet :
+```
+# oc new-project odoo
+```
+### On déploie l'application :
+ 
+```
+# helm install --namespace=odoo --set passworduser=<"YWxZdEVSdEhBTWVnSUFsRHJhc0g="> --set passwordroot=<"ZU5hQ3RVTUJsZXlFclBBcnlkZVINCg=="> --set host=<odoo.example.com> --set storagepostgres=<5Gi> --set storageodoo=<20Gi> odoo/odoo-openshift
+```
+Si vous déployer un deuxième wordpress dans le même namespace, vous devez spécifier les variables mariadbname et wordpressname.
+
+```
+# helm install --namespace=odoo --set passworduser=<"YWxZdEVSdEhBTWVnSUFsRHJhc0g="> --set passwordroot=<"ZU5hQ3RVTUJsZXlFclBBcnlkZVINCg=="> --set host=<odoo.example.com> --set storagepostgres=<5Gi> --set storageodoo=<20Gi> --set nginxname=<nginx2> --set odooname=<odoo2> --set postgresname=<postgres2> wordpress/wordpress-openshift
+```
+Vous pouvez remplacer toutes les valeurs spécifié dans le fichier values.yaml et utilisant l'option :
+```
+--set <variable>=<valeur>
+```
+Example
+```
+--set storagepostgres=50Gi
+```
+
+
+
 # 1)-Installer Catalogue Helm sur Rancher
 
 ### Nous allons apprendre a installer et deployer un catalogue Helm.
