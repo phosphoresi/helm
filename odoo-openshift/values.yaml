@@ -1,11 +1,16 @@
 restartPolicy: Always
 imagePullPolicy: IfNotPresent
 imageodoo : docker-gitlab.sudokeys.com/infra/docker-odoo:11.0.1
+imagepostgres: phosphore/postgresql:10.0
+imagenginx: docker-gitlab.sudokeys.com/infra/docker-nginx:k8s
 host: odoo.example.com
-storagemariadb: 5Gi
+storagepostgres: 5Gi
 storageClassName: glusterfs-storage
 accessmodespostgres: ReadWriteOnce
 odooname: odoo
 postgresname: postgres
 nginxname: nginx
-postgrespassword: password
+passworduser: YWxZdEVSdEhBTWVnSUFsRHJhc0g=
+passwordroot: ZU5hQ3RVTUJsZXlFclBBcnlkZVINCg==
+storageodoo: 20Gi
+accessmodesodoo: ReadWriteMany

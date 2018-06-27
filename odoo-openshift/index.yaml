@@ -3,11 +3,11 @@ entries:
   odoo-openshift:
   - apiVersion: v1
     appVersion: "1.0"
-    created: 2018-06-26T11:21:15.179446998+02:00
+    created: 2018-06-27T14:50:39.260847333+02:00
     description: A Helm chart for Kubernetes
-    digest: 86da6580adb4bdf112029e1ac92085481ca3d235885e4919881c126f0647897b
+    digest: 50dd6957a5b130d87ea05dadf97abe86b0b74ad7809fb58e179c07a994b0e0e2
     name: odoo-openshift
     urls:
     - odoo-openshift-0.1.0.tgz
     version: 0.1.0
-generated: 2018-06-26T11:21:15.178253614+02:00
+generated: 2018-06-27T14:50:39.259473493+02:00
