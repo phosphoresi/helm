@@ -93,7 +93,7 @@ Example
 
 ### Ajouter le dépot nécessaire :
 ```
-# helm repo add wordpress https://raw.githubusercontent.com/phosphoresi/helm/master/odoo-openshift
+# helm repo add odoo https://raw.githubusercontent.com/phosphoresi/helm/master/odoo-openshift
 # helm repo update
 ```
 ### On vérifie qu'il a bien été ajouté :
